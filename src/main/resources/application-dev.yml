@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql:///erp_management?useSSL=false&serverTimezone=UTC
+      username: root
+      password: root
+  # 配置json序列化和反序列化
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+server:
+  port: 8081

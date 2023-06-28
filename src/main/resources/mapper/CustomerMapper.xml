@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bamboo.warehouseerp.mapper.CustomerMapper">
+
+    <resultMap id="CustomerMap" type="com.bamboo.warehouseerp.pojo.Customer" autoMapping="true"/>
+
+    <sql id="columns">
+        id,name,receipt_number,commodity_information,bill_date,operator,total_amount,state,create_time,update_time,is_deleted
+    </sql>
+    <select id="selectPage" resultMap="CustomerMap">
+        select
+        <include refid="columns"/>
+        from customer
+        <where>
+            <if test="vo.receiptNumber != null and vo.receiptNumber != ''">
+                and receipt_number like CONCAT('%',#{vo.receiptNumber},'%')
+            </if>
+            <if test="vo.commodityInformation != null and vo.commodityInformation != ''">
+                and commodity_information like CONCAT('%',#{vo.commodityInformation},'%')
+            </if>
+            <if test="vo.oldDate != null and vo.oldDate != ''">
+                and bill_date &gt;= #{vo.oldDate}
+            </if>
+            <if test="vo.newDate != null and vo.newDate != ''">
+                and bill_date &lt;= #{vo.newDate}
+            </if>
+            and is_deleted = 0
+        </where>
+        order by id desc
+    </select>
+</mapper>
