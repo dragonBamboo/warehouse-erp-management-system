@@ -16,6 +16,6 @@ public class CustomerVo {
     // 商品信息
     private String commodityInformation;
     // 单据日期
-    private Date oldDate;
-    private Date newDate;
+    private String oldDate;
+    private String newDate;
 }

@@ -35,6 +35,12 @@ public class CustomerController {
             @PathVariable("limit") Long limit,
             CustomerVo customerVo
     ) {
+        if ("".equals(customerVo.getOldDate())) {
+            customerVo.setOldDate(customerVo.getOldDate().replace("%20", " ").replace("%3A", ":"));
+        }
+        if ("".equals(customerVo.getNewDate())) {
+            customerVo.setNewDate(customerVo.getNewDate().replace("%20", " ").replace("%3A", ":"));
+        }
         Page<Customer> pageParam = new Page<>(page, limit);
         IPage<Customer> pageModel = customerService.selectPage(pageParam, customerVo);
         return Result.ok(pageModel);
